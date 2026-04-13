@@ -1,0 +1,13 @@
+<form (submit)="save($event)" class="form-container">
+	<div class="input-group">
+		<label>Sauerstoff (SpO2 %)</label>
+		<input type="number" [(ngModel)]="spo2" name="spo2" inputmode="decimal" required>
+	</div>
+
+	<div class="input-group">
+		<label>Puls (BPM)</label>
+		<input type="number" [(ngModel)]="bpm" name="bpm" inputmode="decimal" required>
+	</div>
+
+	<button type="submit" [disabled]="!isValid()">Eintragen</button>
+</form>

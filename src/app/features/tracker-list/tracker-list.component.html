@@ -1,0 +1,25 @@
+<div class="history">
+	<h3>Letzte Messungen</h3>
+	@for (item of history(); track item.id) {
+	<div class="card">
+		<button class="delete-btn" (click)="onDelete(item.id)" title="Löschen">×</button>
+
+		<div class="measurement-row">
+			<div class="status-badge" [class]="item.status">
+				<span class="value">{{ item.spo2 }}%</span>
+				<span class="label">SpO2</span>
+			</div>
+			<div class="status-badge" [class]="item.bpmStatus">
+				<span class="value">{{ item.bpm }}</span>
+				<span class="label">BPM</span>
+			</div>
+		</div>
+
+		<div class="card-footer">
+			<small>{{ item.timestamp | date:'HH:mm - dd.MM' }}</small>
+		</div>
+	</div>
+	} @empty {
+	<p class="empty-msg">Noch keine Daten vorhanden.</p>
+	}
+</div>

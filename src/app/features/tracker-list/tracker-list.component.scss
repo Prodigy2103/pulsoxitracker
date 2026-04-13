@@ -1,0 +1,83 @@
+.card {
+	position: relative;
+	background: white;
+	border-radius: 12px;
+	margin-bottom: 1rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	transition: all 0.3s ease;
+}
+
+.delete-btn {
+	position: absolute;
+	top: 4px;
+	right: 8px;
+	background: none;
+	border: none;
+	color: #ccc;
+	font-size: 1.5rem;
+	cursor: pointer;
+	line-height: 1;
+	transition: color 0.2s;
+}
+
+.delete-btn:hover {
+	color: #c62828;
+}
+
+.measurement-row {
+	display: flex;
+	gap: 8px;
+	padding: 16px 12px 8px;
+}
+
+.status-badge {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.normal {
+	background: #e8f5e9;
+	color: #2e7d32;
+}
+
+.warning {
+	background: #fff3e0;
+	color: #ef6c00;
+}
+
+.danger {
+	background: #ffebee;
+	color: #c62828;
+}
+
+.value {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+.label {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+}
+
+.card-footer {
+	padding: 0 12px 8px;
+	text-align: right;
+	color: #999;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+}

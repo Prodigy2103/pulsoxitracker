@@ -1,0 +1,41 @@
+/* src/app/app.component.css */
+:host {
+	--primary: #007bff;
+	--bg-color: #f0f2f5;
+	--text-main: #1a1a1a;
+	display: block;
+	min-height: 100vh;
+	background-color: var(--bg-color);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.app-container {
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+.header {
+	text-align: center;
+	padding: 1.5rem 0;
+
+	h1 {
+		margin: 0;
+		color: var(--primary);
+		font-size: 2rem;
+	}
+}
+
+.form-section {
+	margin-bottom: 2rem;
+}
+
+/* Optimierung für Tablets/Desktop */
+@media (min-width: 768px) {
+	.app-container {
+		max-width: 600px;
+		padding: 2rem;
+	}
+}
