@@ -2,7 +2,11 @@
 	<h3>Letzte Messungen</h3>
 	@for (item of history(); track item.id) {
 	<div class="card">
-		<button class="delete-btn" (click)="onDelete(item.id)" title="Löschen">×</button>
+		<button class="delete-btn" (click)="openDeleteModal(item.id)">×</button>
+
+		<div class="card-header">
+			<span class="user-name">{{ item.name || 'Unbekannt' }}</span>
+		</div>
 
 		<div class="measurement-row">
 			<div class="status-badge" [class]="item.status">
@@ -16,10 +20,50 @@
 		</div>
 
 		<div class="card-footer">
-			<small>{{ item.timestamp | date:'HH:mm - dd.MM' }}</small>
+			<div class="timestamp-container">
+				<span class="time">{{ item.timestamp | date:'HH:mm' }}</span>
+				<hr class="card-divider">
+				<span class="date">{{ item.timestamp | date:'dd.MM.YY' }}</span>
+			</div>
 		</div>
+
+		<div class="trend-section">
+			<div class="mini-chart" [class]="item.status">
+				<svg viewBox="0 0 100 30" preserveAspectRatio="none">
+					<polyline fill="none" stroke-width="2" [attr.points]="getTrend(item.id, 'spo2')" />
+				</svg>
+				<small>SpO2 Trend</small>
+			</div>
+
+			<div class="mini-chart" [class]="item.bpmStatus">
+				<svg viewBox="0 0 130 30" preserveAspectRatio="none" class="chart-svg">
+					<polyline fill="none" stroke-width="2" stroke-linecap="round"
+						[attr.points]="getTrend(item.id, 'bpm')" />
+
+					<text x="105" y="7" class="chart-text max">{{ getBounds(item.id, 'bpm').max }}</text>
+					<text x="105" y="30" class="chart-text min">{{ getBounds(item.id, 'bpm').min }}</text>
+				</svg>
+				<small>Puls Trend</small>
+			</div>
+		</div>
+
+		<!-- <hr class="card-divider"> -->
 	</div>
 	} @empty {
 	<p class="empty-msg">Noch keine Daten vorhanden.</p>
 	}
 </div>
+
+@if (isModalOpen()) {
+<div class="modal-overlay">
+	<div class="modal-card">
+		<h4>Eintrag löschen?</h4>
+		<p>Möchtest du diese Messung wirklich dauerhaft entfernen?</p>
+
+		<div class="modal-actions">
+			<button class="btn-secondary" (click)="closeModal()">Abbrechen</button>
+			<button class="btn-danger" (click)="confirmDelete()">Löschen</button>
+		</div>
+	</div>
+</div>
+}

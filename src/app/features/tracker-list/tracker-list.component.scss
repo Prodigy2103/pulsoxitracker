@@ -1,73 +1,201 @@
-.card {
-	position: relative;
-	background: white;
-	border-radius: 12px;
-	margin-bottom: 1rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	transition: all 0.3s ease;
-}
+:host {
+	display: block;
+	padding: 1rem;
+	width: 100%;
+	overflow-y: auto;
+	max-height: 40dvh;
 
-.delete-btn {
-	position: absolute;
-	top: 4px;
-	right: 8px;
-	background: none;
-	border: none;
-	color: #ccc;
-	font-size: 1.5rem;
-	cursor: pointer;
-	line-height: 1;
-	transition: color 0.2s;
-}
+	&::-webkit-scrollbar {
+        display: none;
+    }
 
-.delete-btn:hover {
-	color: #c62828;
-}
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-.measurement-row {
-	display: flex;
-	gap: 8px;
-	padding: 16px 12px 8px;
-}
+	.card {
+		position: relative;
+		background: white;
+		border-radius: 12px;
+		margin-bottom: 1rem;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+		transition: all 0.3s ease;
 
-.status-badge {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 10px;
-	border-radius: 8px;
-}
+		.card-header {
+			padding: 0.5rem 0.8rem;
+		}
+	}
 
-.normal {
-	background: #e8f5e9;
-	color: #2e7d32;
-}
+	.delete-btn {
+		position: absolute;
+		top: 8px;
+		right: 12px;
+		z-index: 1;
+		background: white;
+		border-radius: 50%;
+		width: 24px;
+		height: 24px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		border: 1px solid #eee;
+		color: #999;
+	}
 
-.warning {
-	background: #fff3e0;
-	color: #ef6c00;
-}
+	.delete-btn:hover {
+		color: #c62828;
+	}
 
-.danger {
-	background: #ffebee;
-	color: #c62828;
-}
+	.measurement-row {
+		display: flex;
+		gap: 8px;
+		padding: 24px 12px 8px;
+	}
 
-.value {
-	font-size: 1.2rem;
-	font-weight: bold;
-}
+	.status-badge {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 10px;
+		border-radius: 8px;
+	}
 
-.label {
-	font-size: 0.7rem;
-	text-transform: uppercase;
-}
+	.normal {
+		background: #e8f5e9;
+		color: #2e7d32;
+		--trend-color: #2e7d32;
+	}
 
-.card-footer {
-	padding: 0 12px 8px;
-	text-align: right;
-	color: #999;
+	.warning {
+		background: #fff3e0;
+		color: #ef6c00;
+		--trend-color: #ef6c00;
+	}
+
+	.danger {
+		background: #ffebee;
+		color: #c62828;
+		--trend-color: #c62828;
+	}
+
+	.value {
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	.label {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+	}
+
+	.card-footer {
+		padding: 8px 12px;
+		border-top: 1px solid #f0f0f0;
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.timestamp-container {
+		display: flex;
+		gap: 4px;
+		color: #757575;
+		font-size: 0.85rem;
+		font-weight: 500;
+
+		.card-divider {
+			height: 1rem;
+			color: #bdbdbd;
+			margin: 0;
+		}
+	}
+
+	.trend-section {
+		display: flex;
+		justify-content: space-around;
+		padding: 8px 12px;
+		background: #fcfcfc;
+	}
+
+	.mini-chart {
+		width: 50%;
+		text-align: center;
+		padding: 1rem;
+	}
+
+	.mini-chart svg {
+		height: 25px;
+		width: 100%;
+		display: block;
+		overflow: visible;
+	}
+
+	.mini-chart small {
+		font-size: 0.65rem;
+		color: #aaa;
+		text-transform: uppercase;
+	}
+
+	.mini-chart polyline {
+		stroke: var(--trend-color, #aaa);
+	}
+
+	.chart-text {
+		font-size: 0.8rem;
+		font-weight: 700;
+		fill: var(--trend-color, #aaa);
+		font-family: 'Open Sans', sans-serif;
+		text-anchor: start;
+	}
+
+	.modal-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 10;
+		backdrop-filter: blur(2px);
+	}
+
+	.modal-card {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 16px;
+		width: 90%;
+		max-width: 400px;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		text-align: center;
+	}
+
+	.modal-actions {
+		display: flex;
+		gap: 12px;
+		margin-top: 1.5rem;
+	}
+
+	.btn-secondary {
+		flex: 1;
+		padding: 10px;
+		border-radius: 8px;
+		border: none;
+		background: #eee;
+		cursor: pointer;
+	}
+
+	.btn-danger {
+		flex: 1;
+		padding: 10px;
+		border-radius: 8px;
+		border: none;
+		background: #c62828;
+		color: white;
+		cursor: pointer;
+	}
 }
 
 @keyframes fadeOut {

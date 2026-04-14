@@ -1,1 +1,20 @@
-<p>tracker-status works!</p>
+@if (latest()) {
+<div class="status-banner" [class]="overallStatus()">
+	<div class="status-icon">
+		@if (overallStatus() === 'normal') {
+		<span class="icon-check">✓</span>
+		} @else {
+		<span class="icon-alert">!</span>
+		}
+	</div>
+
+	<div class="status-info">
+		<h2>{{ statusMessage() }}</h2>
+		<div class="timestamp-container">
+			<span class="time">{{ latest()?.timestamp | date:'HH:mm' }}</span>
+			<hr class="card-divider">
+			<span class="date">{{ latest()?.timestamp | date:'dd.MM.YY' }}</span>
+		</div>
+	</div>
+</div>
+}

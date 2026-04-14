@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { PulseOxService } from '../../core/services/pulse-ox.service';
 import { DatePipe } from '@angular/common';
 
@@ -10,15 +10,37 @@ import { DatePipe } from '@angular/common';
 })
 export class TrackerListComponent {
   private service = inject(PulseOxService);
-
   readonly history = this.service.history;
+  isModalOpen = signal(false);
+  activeId = signal<string | null>(null);
 
-  onDelete(id: string): void {
-    // 1. Hinweis/Bestätigung anzeigen
-    if (confirm('Eintrag wirklich löschen?')) {
-      // 2. Löschvorgang im Service auslösen
-      this.service.deleteEntry(id);
-      // 3. (Optional) Hier könntest du eine Erfolgsmeldung anzeigen
-    }
+  openDeleteModal(id: string): void {
+    this.activeId.set(id);
+    this.isModalOpen.set(true);
+  }
+
+  closeModal(): void {
+    this.isModalOpen.set(false);
+    this.activeId.set(null);
+  }
+
+  confirmDelete(): void {
+    if (this.activeId()) this.service.deleteEntry(this.activeId()!);
+    this.closeModal();
+  }
+
+  getTrend(id: string, type: 'bpm' | 'spo2'): string {
+    return this.service.getTrendPoints(id, type);
+  }
+
+  getBounds(id: string, type: 'bpm' | 'spo2') {
+    const all = this.history();
+    const index = all.findIndex(m => m.id === id);
+    const subset = all.slice(index, index + 5).map(m => m[type]);
+
+    return {
+      max: Math.max(...subset),
+      min: Math.min(...subset)
+    };
   }
 }

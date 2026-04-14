@@ -13,15 +13,16 @@ export class TrackerFormComponent {
 
   spo2: number | null = null;
   bpm: number | null = null;
+  name: string = "";
 
   isValid(): boolean {
-    return this.spo2 !== null && this.bpm !== null;
+    return this.spo2 !== null && this.bpm !== null && this.name.trim().length > 0;
   }
 
   save(event: Event): void {
     event.preventDefault();
-    if (this.spo2 !== null && this.bpm !== null) {
-      this.service.addEntry(this.spo2, this.bpm);
+    if (this.spo2 !== null && this.bpm !== null && this.name.trim()) {
+      this.service.addEntry(this.spo2, this.bpm, this.name);
       this.resetForm();
     }
   }
@@ -29,5 +30,6 @@ export class TrackerFormComponent {
   private resetForm(): void {
     this.spo2 = null;
     this.bpm = null;
+    this.name = "";
   }
 }

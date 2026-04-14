@@ -1,0 +1,65 @@
+.status-banner {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 0.7rem;
+	border-radius: 16px;
+	margin: 0.7rem 0;
+	transition: all 0.5s ease;
+
+	.timestamp-container {
+		display: flex;
+		gap: 4px;
+		color: #757575;
+		font-size: 0.85rem;
+		font-weight: 500;
+
+		.card-divider {
+			height: 1rem;
+			color: #bdbdbd;
+			margin: 0;
+		}
+	}
+}
+
+.normal {
+	background-color: #e8f5e9;
+	color: #2e7d32;
+	border: 1px solid #c8e6c9;
+}
+
+.warning {
+	background-color: #fff3e0;
+	color: #e65100;
+	border: 1px solid #ffe0b2;
+}
+
+.danger {
+	background-color: #ffebee;
+	color: #c62828;
+	border: 1px solid #ffcdd2;
+}
+
+.status-icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.status-info h2 {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+.status-info p {
+	margin: 4px 0 0;
+	font-size: 0.85rem;
+	opacity: 0.8;
+}

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- Global Reset & Base --- */
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    list-style: none;
+}
+
+/* --- Layout Structures --- */
+header,
+section,
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+
+    .content {
+        width: 100%;
+        max-width: 1920px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

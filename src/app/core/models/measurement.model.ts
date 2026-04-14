@@ -7,4 +7,5 @@ export interface Measurement {
 	timestamp: Date;
 	status: HealthStatus;
 	bpmStatus: string;
+	name: string;
 }
